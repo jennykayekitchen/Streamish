@@ -17,6 +17,8 @@ namespace Streamish.Models
         public string ImageUrl { get; set; }
 
         public DateTime DateCreated { get; set; }
+        
+        public List<Video> Videos { get; set; }
 
     }
 }

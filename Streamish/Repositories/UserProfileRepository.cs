@@ -132,6 +132,7 @@ namespace Streamish.Repositories
             }
         }
 
+        //this code doesn't work because of all the video comments
         public void Delete(int id)
         {
             using (var conn = Connection)
@@ -145,6 +146,7 @@ namespace Streamish.Repositories
                 }
                 using (var cmd = conn.CreateCommand())
                 {
+
                     cmd.CommandText = "DELETE FROM Video WHERE UserProfileId = @Id";
                     DbUtils.AddParameter(cmd, "@Id", id);
                     cmd.ExecuteNonQuery();

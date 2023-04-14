@@ -15,23 +15,19 @@ const VideoList = () => {
   const [searchTerm, setSearchTerm] = useState("")
   
   const [sortOption, setSortOption] = useState(false)
-
-  const [searchedVideos, setSearchedVideos] = useState([]);
-
   
   useEffect(() => {
     getVideos();
   }, []);
-
-  useEffect(() => {
-    setVideos(searchedVideos);
-  }, [searchedVideos]);
   
   const handleSearchButtonClick = (event) => {
     event.preventDefault()
     
-    searchVideos(searchTerm, sortOption).then(videos => setSearchedVideos(videos));
-        
+    searchVideos(searchTerm, sortOption)
+      .then(searchedVideos => {
+        setVideos(searchedVideos)
+        setSearchTerm("")
+        setSortOption(false)})     
   }
 
   return (
@@ -46,9 +42,13 @@ const VideoList = () => {
               setSearchTerm(event.target.value)
             }
             />
-        {/* <input
+        <input
           type="checkbox"
-          if checked, then sort by descending order />     */}
+          checked={sortOption}
+          onChange={
+              (event) => 
+              setSortOption(event.target.checked)}
+           />Sort Descending    
         <button
             onClick={(clickEvent) => handleSearchButtonClick(clickEvent)}>Search</button>
       </div>
